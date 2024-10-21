@@ -15,8 +15,16 @@ function App() {
     setTodos((prev) => prev.filter((todo)=> todo.id !==id))
   }
   const toggleComplete = (id) => {
-    setTodos((prev)=> prev.map((prevTodo) => prevTodo.id === id ? {...prevTodo,completed: !prevTodo.completed} : "false"))
-  }
+    // Map over the todos to find and toggle the 'completed' status
+    setTodos((prev) =>
+      prev.map((prevTodo) => 
+        prevTodo.id === id 
+          ? { ...prevTodo, completed: !prevTodo.completed } // Toggle the completed status
+          : prevTodo // Return the original todo if the id doesn't match
+      )
+    );
+  };
+  
 
   useEffect(() => {
     const storedTodos = localStorage.getItem("todos");
